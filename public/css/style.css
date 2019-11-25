@@ -58,7 +58,7 @@ body {
 	font-family: 'Open Sans', sans-serif;
 	font-size:14px;
 	font-weight:normal;
-	color:#fff;
+	color:rgb(0, 0, 0);
 	margin:0;
 }
 h2{
@@ -90,6 +90,10 @@ h6{
 p{
 	line-height:24px;
 	margin:0;
+}
+
+form{
+	color: black;
 }
 
 /* Header Styles
@@ -146,7 +150,7 @@ color: #fff;
 
 .link{
 	padding:15px 35px;
-	background:#7cc576;
+	background:#2b2a2a;
 	color:#fff !important;
 	font-size:16px;
 	font-weight:400;
@@ -162,12 +166,12 @@ color: #fff;
 }
 .link:hover {
 	text-decoration:none;
-	color:#7cc576 !important;
+	color:#2b2a2a !important;
 	background:#fff;
 }
 
 .link:active, .link:focus {
-	background: #7cc576;
+	background: #2b2a2a;
 	text-decoration:none;
 	color:#fff !important;
 }
@@ -775,7 +779,6 @@ border: 2px solid #fff;
 .footer{
 	background:url(../img/pw_maze_black_2X.png) left top repeat;
 	padding:35px 0 35px;
-	color: #fff;
 }
 .footer-logo{
 	margin:15px auto 35px;

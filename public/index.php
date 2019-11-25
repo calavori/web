@@ -1,7 +1,7 @@
 <?php
 
 define('ROOTDIR', realpath(dirname(__DIR__)).DIRECTORY_SEPARATOR);
-define('APPNAME', 'Men Hair Grooming');
+define('APPNAME', 'Me And The Boys Fitness');
 
 // Turn off error display in production
 ini_set('display_errors', 1);
@@ -26,9 +26,11 @@ Router::post('/register', '\\App\Controllers\Auth\RegisterController@register');
 Router::get('/login', '\App\Controllers\Auth\LoginController@showLoginForm');
 Router::post('/login', '\App\Controllers\Auth\LoginController@login');
 
-// Contact routes
+// Home routes
 Router::get('/', '\App\Controllers\HomeController@index');
-Router::get('/home', '\App\Controllers\HomeController@index');
+
+// Add route
+Router::post('/add', '\App\Controllers\HomeController@add');
 
 // Error routes
 Router::error('\App\Controllers\Controller@notFound');

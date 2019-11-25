@@ -12,7 +12,7 @@ class RegisterController extends Controller
     {
         // Nếu người dùng đã đăng nhập thì không cho đăng ký
         if (Guard::checkLogin()) {
-            redirect('/home');
+            redirect('/');
         }
         
         parent::__construct();

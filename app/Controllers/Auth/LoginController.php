@@ -12,7 +12,7 @@ class LoginController extends Controller
     {
         // Nếu người dùng đã đăng nhập thì không hiện trang đăng nhập
         if (Guard::checkLogin()) {
-            redirect('/home');
+            redirect('/');
         }
 
         // Thu thập dữ liệu cho view
@@ -41,7 +41,7 @@ class LoginController extends Controller
             $errors['email'] = 'Unknown email.';
         } else if (Guard::login($user, $userCredentials)) {
             // Đăng nhập thành công...
-            redirect('/home');
+            redirect('/');
         } else {
             // Sai mật khẩu...
             $errors['password'] = 'Incorrect password.';

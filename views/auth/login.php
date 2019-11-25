@@ -50,7 +50,7 @@
                                 </button>
 
                                 <a class="btn btn-link" href="/register">
-                                    You are a new user?
+                                    You are a new staff?
                                 </a>
                             </div>
                         </div>
