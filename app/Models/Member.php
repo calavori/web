@@ -21,4 +21,14 @@ class Member extends Model{
     public function getErrors() {
         return $this->errors;
     }
+
+    public function getData(){
+        $members = $this->get();
+        return $members;
+    }
+
+    public function getMember($id){
+        $member = $this->where('id', $id)->first();
+        return $member;
+    }
 }

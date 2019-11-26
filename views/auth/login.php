@@ -16,15 +16,15 @@
 
                         <input type="hidden" name="_csrf_token" value="<?=\App\Csrf::getToken()?>">
                         
-                        <div class="form-group <?=isset($errors['email']) ? 'has-error' : '' ?>">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                        <div class="form-group <?=isset($errors['acc']) ? 'has-error' : '' ?>">
+                            <label for="acc" class="col-md-4 control-label">Username</label>
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" 
-                                    value="<?=isset($old['email']) ? $this->e($old['email']) : '' ?>" required autofocus>
+                                <input id="acc" type="text" class="form-control" name="acc" 
+                                    value="<?=isset($old['acc']) ? $this->e($old['acc']) : '' ?>" required autofocus>
 
-                                <?php if (isset($errors['email'])): ?>
+                                <?php if (isset($errors['acc'])): ?>
                                     <span class="help-block">
-                                        <strong><?=$this->e($errors['email'])?></strong>
+                                        <strong><?=$this->e($errors['acc'])?></strong>
                                     </span>
                                 <?php endif ?>                               
                             </div>

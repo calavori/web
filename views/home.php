@@ -2,12 +2,13 @@
 
 <?php $this->start("page") ?>
 
-<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
-<link rel="stylesheet" type="text/css" href="css/util.css">
-<link rel="stylesheet" type="text/css" href="css/main.css">
 <link href="css/style.css" rel="stylesheet" type="text/css">
-	
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+
+
+
+
 <!-- FLASH MESSAGES -->
 <?=$this->fetch("parts/flash", ['messages' => $messages])?> 
 
@@ -79,9 +80,94 @@
 
 
 
+<section class="main-section" id="manage">
+	<div class="row">
+		<div class="container col-xs-10 col-xs-offset-1">
+			<table id="manageTable" class="table table-responsive dislpay">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Phone Number</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Manage</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach($members as $member): ?>
+					<tr>
+						<td><?=$this->e($member->id)?></td>
+						<td><?=$this->e($member->name)?></td>
+						<td><?=$this->e($member->phone)?></td>
+						<td><?=$this->e($member->start)?></td>
+						<td><?=$this->e($member->end)?></td>
+						<td>
+
+							<a href="/edit/<?=$this->e($member->id)?>" class="btn btn-xs btn-warning">
+							<i alt="Edit" class="fa fa-pencil"></i></a>
+
+							<form class="delete" action="/delete/<?=$this->e($member->id)?>" method="POST" style="display: inline;">
+								<button type="submit" class="btn btn-xs btn-danger" name="delete">
+									<i alt="Delete" class="fa fa-trash"></i>
+								</button>
+							</form>
+
+						</td>
+					</tr>
+				<?php endforeach ?>  
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>
 
 
-		 
+	<!-- Confirm Delete -->
+<div id="delete-confirm" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Confirmation</h4>
+			</div>
+			<div class="modal-body">Do you want to delete this member?</div>
+			<div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="btn btn-danger" id="delete">Delete</button>
+				<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script>
+	$('#manageTable').DataTable();
+	
+	$(document).ready(function(){
+		
+		$('button[name="delete"]').on('click', function(e){
+			var $form=$(this).closest('form');
+			e.preventDefault();
+			$('#delete-confirm').modal({ backdrop: 'static', keyboard: false }).one('click', '#delete', function() {
+				$form.trigger('submit');
+			});
+		});
+	});
+</script>
+
 
 
 

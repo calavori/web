@@ -29,8 +29,11 @@ Router::post('/login', '\App\Controllers\Auth\LoginController@login');
 // Home routes
 Router::get('/', '\App\Controllers\HomeController@index');
 
-// Add route
+// Manage route
 Router::post('/add', '\App\Controllers\HomeController@add');
+Router::get('/edit/(:num)', '\App\Controllers\HomeController@edit');
+Router::post('/update/(:num)', '\App\Controllers\HomeController@update');
+Router::post('/delete/(:num)', '\App\Controllers\HomeController@delete');
 
 // Error routes
 Router::error('\App\Controllers\Controller@notFound');

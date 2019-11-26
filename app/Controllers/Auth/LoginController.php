@@ -35,10 +35,10 @@ class LoginController extends Controller
         $userCredentials = $this->getUserCredentials();
 
         $errors = [];
-        $user = User::where('email', $userCredentials['email'])->first();
+        $user = User::where('name', $userCredentials['acc'])->first();
         if ($user === null) {
             // Người dùng không tồn tại...
-            $errors['email'] = 'Unknown email.';
+            $errors['acc'] = 'Unknown username.';
         } else if (Guard::login($user, $userCredentials)) {
             // Đăng nhập thành công...
             redirect('/');
@@ -61,7 +61,7 @@ class LoginController extends Controller
     protected function getUserCredentials()
     {
         return [
-            'email' => filter_var($_POST['email'], FILTER_VALIDATE_EMAIL),
+            'acc' => $_POST['acc'],
             'password' => $_POST['password']
         ];        
     }
