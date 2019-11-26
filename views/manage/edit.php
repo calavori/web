@@ -70,6 +70,19 @@
                             <?php endif ?>                                 
                         </div>
 
+                        <!-- Add more Course -->
+                        <div class="form-group>
+                            <label for="courses"><b>Add Course</b></label>
+                            <select name="course">
+                                <option value="0">0 month</option>
+                                <option value="1">1 month</option>
+                                <option value="3">3 month</option>
+                                <option value="6">6 month</option>
+                                <option value="12">12 month</option>
+                            </select>
+						</div>
+
+                        <br>
                         <!-- Submit -->
                         <button type="submit" name="submit" id="submit" class="btn btn-primary">Update</button>
                     </form>

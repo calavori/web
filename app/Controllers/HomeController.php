@@ -56,11 +56,13 @@ class HomeController extends Controller
     }
 
     public function get_member_info(){
+        $str = $_POST['end']."+".$_POST['course']." Months";
+        $end_month = strtotime($str);
         return[
             'name' => $_POST['name'],
             'phone' => $_POST['phone'],
             'start' => date("Y-m-d 0:0:0", strtotime($_POST['start'])),
-            'end' => date("Y-m-d 23:59:59", strtotime($_POST['end']))
+            'end' => date("Y-m-d 23:59:59", $end_month)
         ];   
     }
 

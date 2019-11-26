@@ -126,11 +126,10 @@ iframe {
 }
 
 table {
-  border-radius: 10px;
   border-spacing: 1;
   border-collapse: collapse;
   background: white;
-  border-radius: 10px;
+  border-radius: 20px;
   overflow: hidden;
   width: 100%;
   margin: 0 auto;
