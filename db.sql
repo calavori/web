@@ -2,7 +2,7 @@ create database store;
 use store;
 
 CREATE TABLE `staff` (
-  `id` int(10) UNSIGNED NOT NULL,
+  `id` int(10) primary key auto_increment,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,

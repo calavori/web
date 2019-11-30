@@ -26,6 +26,11 @@ Router::post('/register', '\\App\Controllers\Auth\RegisterController@register');
 Router::get('/login', '\App\Controllers\Auth\LoginController@showLoginForm');
 Router::post('/login', '\App\Controllers\Auth\LoginController@login');
 
+// Staff route
+Router::get('/edit_staff/(:num)', '\App\Controllers\StaffController@edit');
+Router::post('/update_staff/(:num)', '\App\Controllers\StaffController@update');
+
+
 // Home routes
 Router::get('/', '\App\Controllers\HomeController@index');
 

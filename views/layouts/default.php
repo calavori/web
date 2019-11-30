@@ -58,10 +58,17 @@
                                                  document.getElementById('logout-form').submit();">
                                         Logout
                                     </a>
+                                    
 
                                     <form id="logout-form" action="/logout" method="POST" style="display: none;">
                                         <input type="hidden" name="_csrf_token" value="<?=\App\Csrf::getToken()?>">
                                     </form>
+
+                                    <a href="/edit_staff/<?= $_SESSION['user_id']?>">
+                                        Edit information
+                                    </a>
+
+
                                 </li>
                             </ul>
                         </li>
