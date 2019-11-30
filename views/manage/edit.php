@@ -1,6 +1,12 @@
 <?php $this->layout("layouts/default", ["title" => APPNAME]) ?>
 
+
+
+
 <?php $this->start("page") ?>
+
+
+
 <div class="container">
     <section id="inner" class="inner-section section">
         <div class="container">
@@ -21,7 +27,7 @@
                         <input type="hidden" name="_csrf_token" value="<?=\App\Csrf::getToken()?>">
 
                         <!-- Name -->
-                        <div class="form-group<?=isset($errors['name']) ? ' has-error' : '' ?>">
+                        <div class="form-group<?=isset($errors['name']) ? ' has-error' : 'Name must be entered.' ?>">
                             <label for="name">Name</label>
                             <input type="text" name="name" class="form-control" maxlen="255" id="name" 
                                 placeholder="Enter Name" value="<?=$this->e($member['name'])?>" />
@@ -34,9 +40,9 @@
                         </div>
 
                         <!-- Phone -->
-                        <div class="form-group<?=isset($errors['phone']) ? ' has-error' : '' ?>">
+                        <div class="form-group<?=isset($errors['phone']) ? ' has-error' : 'Phone number must be entered and consist 10 numbers.' ?>">
                             <label for="phone">Phone Number</label>
-                            <input type="tel" name="phone" class="form-control" id="phone" 
+                            <input type="tel" name="phone" class="form-control" id="phone" minlength="9" maxlength="11"
                                 placeholder="Enter Phone" value="<?=$this->e($member['phone'])?>" />
 
                             <?php if (isset($errors['phone'])): ?>
@@ -47,7 +53,7 @@
                         </div>
 
                         <!-- Start Date -->
-                        <div class="form-group<?=isset($errors['start']) ? ' has-error' : '' ?>">
+                        <div class="form-group<?=isset($errors['start']) ? ' has-error' : 'Date is not valid.' ?>">
                             <label for="start">Start Date</label>
                             <input type="date" name="start" class="form-control" id="start" 
                                 value="<?=date('Y-m-d', strtotime($this->e($member['start'])))?>" />
@@ -59,7 +65,7 @@
                         </div>
 
                         <!-- End Date -->
-                        <div class="form-group<?=isset($errors['start']) ? ' has-error' : '' ?>">
+                        <div class="form-group<?=isset($errors['start']) ? ' has-error' : 'Date is not valid.' ?>">
                             <label for="end">End Date</label>
                             <input type="date" name="end" class="form-control" id="end" 
                                 value="<?=date('Y-m-d', strtotime($this->e($member['end'])))?>" />
@@ -68,7 +74,7 @@
                                     <strong><?=$this->e($errors['end'])?></strong>
                                 </span>
                             <?php endif ?>                                 
-                        </div>
+                        </div><br>
 
                         <!-- Add more Course -->
                         <div class="form-group>
@@ -93,8 +99,25 @@
         </div>
     </section>
 </div>
-<?php $this->stop() ?>
 
-<?php $this->start("page_specific_js") ?>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+<script>
+        //Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
+        $("#frm").validate({
+            rules: {
+                name: "required",
+                phone: "required",
+            },
+            messages: {
+                name: "Name must be entered",
+                phone: {
+                    required: "Phone number must be entered",
+                    minlength: "phone number must consist 9-11 numbers",
+                    maxlength: "phone number must consist 9-11 numbers"
+                }
+            }
+        });
+</script>
 
 <?php $this->stop() ?>

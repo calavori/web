@@ -7,7 +7,12 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 
 
-
+<style>
+	.error {
+		color: #F00;
+		background-color: #FFF;
+	}
+</style>
 
 <!-- FLASH MESSAGES -->
 <?=$this->fetch("parts/flash", ['messages' => $messages])?> 
@@ -45,7 +50,7 @@
 		<div class="panel panel-default col-md-8 col-md-offset-2">
 			<div class="panel-heading text-center"><h2>Register for newcomer</h2></div>
 				<div class="panel-body">   
-					<form class="form-horizontal" role="form" method="POST" action="/add">
+					<form id="form" class="form-horizontal" role="form" method="POST" action="/add">
 						<div class="container col-md-10 col-md-offset-1">
 							<div class="form-group>
 								<label for="name"><b>Member's name</b></label>
@@ -54,7 +59,7 @@
 							<br>
 							<div class="form-group>
 								<label for="phone"><b>Phone number</b></label>
-								<input type="tel" name="tel" placeholder="Enter phone number" class="form-control">
+								<input type="tel" name="tel" placeholder="Enter phone number" minlength="9" maxlength="11" class="form-control">
 							</div>
 							<br>
 							<div class="form-group>
@@ -153,6 +158,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 <script>
 	$('#manageTable').DataTable();
 	
@@ -166,6 +172,21 @@
 			});
 		});
 	});
+
+	$("#form").validate({
+            rules: {
+                name: "required",
+                tel: "required",
+            },
+            messages: {
+                name: "Name must be entered",
+                tel: {
+                    required: "Phone number must be entered",
+                    minlength: "phone number must consist 9-11 numbers",
+                    maxlength: "phone number must consist 9-11 numbers"
+                }
+            }
+        });
 </script>
 
 

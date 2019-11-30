@@ -322,3 +322,8 @@ color: #fff;
 	animation-delay: 1.2s; 
 	-webkit-animation-delay: 1.2s; 
 }
+
+.error {
+	color: #F00;
+	background-color: #FFF;
+}

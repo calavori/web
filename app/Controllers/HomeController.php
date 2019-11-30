@@ -41,7 +41,8 @@ class HomeController extends Controller
             $messages = ['success' => 'Member has been registered.'];
             redirect('/#manage', ['messages' => $messages]);
         }
-        redirect('/', ['errors' => $member->getErrors()]);
+        $messages = ['error' => 'Register failed. Name must be entered and phone number must consist 10 numbers.'];
+        redirect('/', ['messages' => $messages]);
     }
 
     public function get_newcomer_info(){
@@ -89,9 +90,11 @@ class HomeController extends Controller
             $messages = ['success' => 'Member has been edited.'];
             redirect('/#manage', ['messages' => $messages]);
             }
-        $this->saveFormValues();
-        redirect('edit/'.$id, ['errors' => $member->getErrors()]);
+        else{
+            $this->saveFormValues();
+            redirect('/edit/'.$id);
         }
+    }
 
     public function delete($id){
         $members = new Member();
