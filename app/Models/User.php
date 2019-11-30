@@ -32,4 +32,9 @@ class User extends Model
     {
         return $this->errors;
     }     
+
+    public function getData(){
+        $users = $this->get();
+        return $users;
+    }
 }

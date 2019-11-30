@@ -43,6 +43,10 @@ Router::post('/delete/(:num)', '\App\Controllers\HomeController@delete');
 // Error routes
 Router::error('\App\Controllers\Controller@notFound');
 
+// Api routes
+Router::get('/api/get_users', '\App\Controllers\ApiController@get_users');
+Router::get('/api/get_members', '\App\Controllers\ApiController@get_members');
+
 Router::dispatch();
 
 ob_end_flush();
