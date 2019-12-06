@@ -59,7 +59,7 @@ class ApiController extends Controller{
         return (isset($codes[$status])) ? $codes[$status] : ”;
     }
 
-    public function sendResponse($status = 200, $body = ”, $content_type = 'text/html'){
+    public function sendResponse($status = 200, $body = '', $content_type = 'text/html'){
         $status_header = 'HTTP/1.1 ' . $status . ' ' . $this->getStatusCodeMeeage($status);
         header($status_header);
         header('Content-type: ' . $content_type);
@@ -88,7 +88,91 @@ class ApiController extends Controller{
         }
     }
 
-    
+    public function delete_member(){
+        $data = json_decode(file_get_contents("php://input"));
+        $members = new Member();
+        $member = $members->getMember($data->id);
+        if(!$member){
+            $this->sendResponse(404, json_encode(["message" => "Member not found."]));
+        }
+        else{
+            $member->delete();
+            $this->sendResponse(200, json_encode(["message" => "Member was deleted."]));
+        }
+    }
+
+    public function delete_user(){
+        $data = json_decode(file_get_contents("php://input"));
+        $users = new User();
+        $user = $users->getMember($data->id);
+        if(!$member){
+            $this->sendResponse(404, json_encode(["message" => "User not found."]));
+        }
+        else{
+            $member->delete();
+            $this->sendResponse(200, json_encode(["message" => "User was deleted."]));
+        }
+    }
+
+    public function add_user(){
+        $data = json_decode(file_get_contents("php://input"), true);
+        $users = new User();
+        if ($users->validate($data)){
+            $users::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => password_hash($data['password'], PASSWORD_DEFAULT)
+            ]);    
+            $this->sendResponse(200, json_encode(["message" => "User was created."]));
+        }
+        else{
+            $this->sendResponse(400, json_encode(["message" => "User creating failed."]));
+        }
+    }
+
+    public function add_member(){
+        $data = json_decode(file_get_contents("php://input"), true);
+        $members = new Member();
+        if ($members->validate($data)){
+            $members::create([
+                'name' => $data['name'],
+                'phone' => $data['phone'],
+                'start' => date($data['start']." 0:0:0"),
+                'end' => date($data['end']." 23:59:59")
+            ]);    
+            $this->sendResponse(200, json_encode(["message" => "Member was created."]));
+        }
+        else{
+            $this->sendResponse(400, json_encode(["message" => "Member creating failed."]));
+        }
+    }
+
+    public function edit_user(){
+        $data = json_decode(file_get_contents("php://input"), true);
+        $user = User::where('id', $data['id'])->first();
+        if (!$user){
+            $this->sendResponse(400, json_encode(["message" => "User not found."]));
+        }
+        else{
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            $user->fill($data)->save(); 
+            $this->sendResponse(200, json_encode(["message" => "User was edited."]));
+        }
+    }
+
+    public function edit_member(){
+        $data = json_decode(file_get_contents("php://input"), true);
+        $member = Member::where('id', $data['id'])->first();
+        if (!$member){
+            $this->sendResponse(400, json_encode(["message" => "Member not found."]));
+        }
+        else{
+            $data['start'] = date($data['start']." 0:0:0");
+            $data['end'] =  date($data['end']." 23:59:59");
+            $member->fill($data)->save(); 
+            $this->sendResponse(200, json_encode(["message" => "Member was edited."]));
+        }
+    }
     
 }
 

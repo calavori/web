@@ -44,8 +44,16 @@ Router::post('/delete/(:num)', '\App\Controllers\HomeController@delete');
 Router::error('\App\Controllers\Controller@notFound');
 
 // Api routes
-Router::get('/api/get_users', '\App\Controllers\ApiController@get_users');
-Router::get('/api/get_members', '\App\Controllers\ApiController@get_members');
+Router::get('/api/user/get', '\App\Controllers\ApiController@get_users');
+Router::delete('/api/user/delete', '\App\Controllers\ApiController@delete_user');
+Router::post('/api/user/add', '\App\Controllers\ApiController@add_user');
+Router::put('/api/user/edit', '\App\Controllers\ApiController@edit_user');
+
+Router::get('/api/member/get', '\App\Controllers\ApiController@get_members');
+Router::delete('/api/member/delete', '\App\Controllers\ApiController@delete_member');
+Router::post('/api/member/add', '\App\Controllers\ApiController@add_member');
+Router::put('/api/member/edit', '\App\Controllers\ApiController@edit_member');
+
 
 Router::dispatch();
 
