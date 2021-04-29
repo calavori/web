@@ -1,7 +1,7 @@
 {
     "require": {
         "league/plates": "3.*",
-        "illuminate/database": "5.*"
+        "illuminate/database": "6.*"
     },
     "autoload": {
         "psr-4": {
